@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+
+	<comment>KP Model Configuration</comment>
+
+	<entry key="activeProfiles">dev</entry>
+
+	<entry key="system.version">20200718.1000</entry>
+
+	<entry key="kp.solstice.datasource.type">basic</entry><!-- basic, jndi -->
+	<entry key="kp.solstice.datasource.basic.mysql.beanName">dataSourceSolstice</entry>
+	<entry key="kp.solstice.datasource.basic.mysql.driverClassName">com.mysql.jdbc.Driver</entry>
+	<!-- 로컬 테스트 -->
+	<entry key="kp.solstice.datasource.basic.mysql.url">jdbc:mysql://kt1.junesoft.net:1113/solstice?serverTimezone=Asia/Seoul</entry>
+	<entry key="kp.solstice.datasource.basic.mysql.username">root</entry>
+	<entry key="kp.solstice.datasource.basic.mysql.password">Jsoft@048</entry>
+
+	<entry key="kp.catchus.datasource.type">basic</entry><!-- basic, jndi -->
+	<entry key="kp.catchus.datasource.basic.mysql.beanName">dataSourceCatchUs</entry>
+	<entry key="kp.catchus.datasource.basic.mysql.driverClassName">com.mysql.jdbc.Driver</entry>
+	<!-- 로컬 테스트 -->
+	<entry key="kp.catchus.datasource.basic.mysql.url">jdbc:mysql://kt5.junesoft.net:4/sh_test?serverTimezone=Asia/Seoul</entry>
+	<entry key="kp.catchus.datasource.basic.mysql.username">root</entry>
+	<entry key="kp.catchus.datasource.basic.mysql.password">Jsoft@048</entry>
+
+	<entry key="kp.sqlmap.db1.dbType">mysql</entry>
+
+	<entry key="kp.trademark.schedules.bulk.cron">0 53 15 * * ?</entry>
+	<entry key="kp.trademark.schedules.update.cron">0 22 15 * * ?</entry>
+	<entry key="kp.trademark.schedules.update.previousDay">8</entry>
+
+	<entry key="kp.patent.schedules.bulk.cron">0 25 15 * * ?</entry>
+	<entry key="kp.patent.schedules.update.cron">0 28 15 * * ?</entry>
+	<entry key="kp.patent.schedules.update.previousDay">8</entry>
+
+	<entry key="kp.kiprisplus.trademark.restApi.accessKey">M7flnHjIOBSyYiRDnKYc1wt6VSDlaaCUS501bY8en9k=</entry>
+	<entry key="kp.kiprisplus.patent.restApi.accessKey">23=eH4j7JFCFB0PuuUk68tgN5=VJl2gGGe8cts/wWVQ=</entry>
+	<entry key="kp.kiprisplus.trademark.advancedSearch.applicationDate">20190101~20201231</entry>
+	<entry key="kp.kiprisplus.patent.advancedSearch.applicationDate">20190101~20201231</entry>
+
+	<entry key="kp.batch.transaction.count">500</entry>
+
+	<entry key="kp.naver.romanization.trademark.use">false</entry>
+
+	<entry key="kp.naver.romanization.clientId">sxlvr1gotw</entry>
+	<entry key="kp.naver.romanization.clientSecret">4d4vfTNrtpvFIWPwO5BfrCyT6RBBgoFF5aLiqkv1</entry>
+
+	<entry key="kp.naver.translation.clientId">z47uzsdzzv</entry>
+	<entry key="kp.naver.translation.clientSecret">Rez6zDW7RIVSLF5ZJQecdYWkoBqFVgnZbo2e4wPg</entry>
+
+
+
+</properties>

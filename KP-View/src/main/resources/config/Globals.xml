@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+
+	<comment>Global Config</comment>
+
+	<entry key="osType">WINDOWS</entry>
+	<entry key="localIp">127.0.0.1</entry>
+	<entry key="mainPage">/main/mainPage.do</entry>
+
+	<entry key="notice.RecordCountPerPage">15</entry>
+	<entry key="archive.RecordCountPerPage">15</entry>
+	<entry key="standard.RecordCountPerPage">15</entry>
+	<entry key="rule.RecordCountPerPage">10</entry>
+	<entry key="kepicRefRoom.RecordCountPerPage">15</entry>
+	<entry key="kolasRefRoom.RecordCountPerPage">15</entry>
+	<entry key="oldIms.RecordCountPerPage">10</entry>
+	<entry key="relatedDocs.RecordCountPerPage">10</entry>
+	<entry key="searcch.RecordCountPerGroup">5</entry>
+
+	<entry key="commons.dext5editor.inline.url"><![CDATA[image/view?category=%s&mode=%s&dir=%s&file=%s]]></entry>
+	<entry key="commons.dext5editor.attach.url"><![CDATA[download?category=%s&mode=%s&dir=%s&file=%s]]></entry>
+
+	<entry key="comm.temp.file.url"><![CDATA[/getCommFile.do?category=%s&fileYmd=%s&locType=%s&fileOrgNm=%s&fileNm=%s&ext=%s&fileSize=%s&temp=Y]]></entry>
+	<entry key="comm.file.url"><![CDATA[/getCommFile.do?category=%s&fileYmd=%s&locType=%s&fileOrgNm=%s&fileNm=%s&ext=%s&fileSize=%s]]></entry>
+	<entry key="comm.file.uri">/getCommFile.do?</entry>
+	<entry key="comm.fileView.uri">/viewCommFile.do?</entry>
+
+</properties>

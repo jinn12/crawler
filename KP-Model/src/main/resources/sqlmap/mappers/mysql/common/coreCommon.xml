@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="commonSql">
+	<sql id="common-insert-condition">
+		, LT_CH_DTTI
+		, LT_CHPR_ID
+		, CMGRP_CD
+	</sql>
+	<sql id="common-insert-value">
+		, TO_CHAR(SYSTIMESTAMP, 'YYYYMMDDHH24MISSFF3')
+		, #{ltChprId}
+		, '01'
+	</sql>
+	<sql id="common-update-condition">
+		LT_CH_DTTI = TO_CHAR(SYSTIMESTAMP, 'YYYYMMDDHH24MISSFF3'),
+		LT_CHPR_ID = #{ltChprId},
+	</sql>
+	<sql id="common-total">
+		, COUNT(1) over() as totalrow
+	</sql>
+</mapper>

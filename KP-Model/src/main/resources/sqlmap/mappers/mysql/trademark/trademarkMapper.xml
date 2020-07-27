@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rnd.solstice.dao.mapper.TrademarkMapper">
+
+	<insert id="insertOne" parameterType="Tb20300TmDbVO">
+		<selectKey resultType="String" keyProperty="tmDbSeq" order="BEFORE">
+  			SELECT IFNULL(MAX(tm_db_seq), 0) + 1 FROM TB20_300_TM_DB
+  		</selectKey>
+		INSERT INTO TB20_300_TM_DB
+		(
+			tm_db_seq
+			, appl_no
+			, appl_date
+			, applicant
+			, reg_no
+			, reg_date
+			, product_category_list
+			, pub_no
+			, pub_date
+			, reg_pub_no
+			, reg_pub_date
+			, org_appl_no
+			, org_appl_date
+			, prior_no
+			, prior_date
+			, rel_appl_no
+			, common_status
+			, regal_status
+			, exam_status
+			, exam_date
+			, retro_category
+			, retro_date
+			, tm_ko
+			, tm_roman1
+			, image_url
+			, reg_time
+			, del_flag
+			, appl_url
+			, reg_url
+			, tm_roman2
+			, tm_en
+			, tm_roman3
+			, tm_roman4
+			, tm_roman5
+			, product_category_version
+			, db_reg_year
+			, db_reg_month
+			, db_reg_date
+		)
+		VALUES
+		(
+			#{tmDbSeq}
+			, #{applNo}
+			, #{applDate}
+			, #{applicant}
+			, #{regNo}
+			, #{regDate}
+			, #{productCategoryList}
+			, #{pubNo}
+			, #{pubDate}
+			, #{regPubNo}
+			, #{regPubDate}
+			, #{orgApplNo}
+			, #{orgApplDate}
+			, #{priorNo}
+			, #{priorDate}
+			, #{relApplNo}
+			, #{commonStatus}
+			, #{regalStatus}
+			, #{examStatus}
+			, #{examDate}
+			, #{retroCategory}
+			, #{retroDate}
+			, #{tmKo}
+			, #{tmRoman1}
+			, #{imageUrl}
+			, #{regTime}
+			, #{delFlag}
+			, #{applUrl}
+			, #{regUrl}
+			, #{tmRoman2}
+			, #{tmEn}
+			, #{tmRoman3}
+			, #{tmRoman4}
+			, #{tmRoman5}
+			, #{productCategoryVersion}
+			, #{dbRegYear}
+			, #{dbRegMonth}
+			, #{dbRegDate}
+		)
+	</insert>
+
+
+	<update id="updateOne" parameterType="Tb20300TmDbVO">
+		UPDATE TB20_300_TM_DB
+		SET
+		<!-- appl_no -->
+			appl_date = #{applDate}
+			, applicant = #{applicant}
+			, reg_no = #{regNo}
+			, reg_date = #{regDate}
+			, product_category_list = #{productCategoryList}
+			, pub_no = #{pubNo}
+			, pub_date = #{pubDate}
+			, reg_pub_no = #{regPubNo}
+			, reg_pub_date = #{regPubDate}
+			, org_appl_no = #{orgApplNo}
+			, org_appl_date = #{orgApplDate}
+			, prior_no = #{priorNo}
+			, prior_date = #{priorDate}
+			, rel_appl_no = #{relApplNo}
+			, common_status = #{commonStatus}
+			, regal_status = #{regalStatus}
+			, exam_status = #{examStatus}
+			, exam_date = #{examDate}
+			, retro_category = #{retroCategory}
+			, retro_date = #{retroDate}
+			, tm_ko = #{tmKo}
+			, tm_roman1 = #{tmRoman1}
+			, image_url = #{imageUrl}
+			, reg_time = #{regTime}
+			, del_flag = #{delFlag}
+			, appl_url = #{applUrl}
+			, reg_url = #{regUrl}
+			, tm_roman2 = #{tmRoman2}
+			, tm_en = #{tmEn}
+			, tm_roman3 = #{tmRoman3}
+			, tm_roman4 = #{tmRoman4}
+			, tm_roman5 = #{tmRoman5}
+			, product_category_version = #{productCategoryVersion}
+		WHERE
+			tm_db_seq = #{tmDbSeq}
+	</update>
+	<select id="selectCount" parameterType="Tb20300TmDbVO" resultType="int">
+		SELECT
+			COUNT(tm_db_seq)
+		FROM
+			TB20_300_TM_DB
+		WHERE
+			appl_no = #{applNo}
+	</select>
+	<select id="selectTmDbSeq" parameterType="Tb20300TmDbVO" resultType="Tb20300TmDbVO">
+		SELECT
+			tm_db_seq
+		FROM
+			TB20_300_TM_DB
+		WHERE
+			appl_no = #{applNo}
+		LIMIT 1
+	</select>
+	<!-- 20200725 이하 사용안함 -->
+	<!-- <delete id="deleteProductDetail" parameterType="Tb20310TmBiblioWithDimensionInfosVO">
+		DELETE FROM TB20_310_PRODUCT_DETAIL WHERE tm_seq = #{tmSeq}
+	</delete>
+	<insert id="insertListProductDetail" parameterType="Tb20310TmBiblioWithDimensionInfosVO">
+		INSERT INTO TB20_310_PRODUCT_DETAIL
+		(
+			prod_detail_seq
+			, prod_cate_version
+			, prod_cate
+			, prod_cate_detail
+			, tm_seq
+		)
+		VALUES
+		<foreach collection="prodeuctDetailInfoList" item="prodeuctDetailInfo" index="index" separator=",">
+           	(
+           	#{prodeuctDetailInfo.prodDetailSeq}
+			, #{prodeuctDetailInfo.prodCateVersion}
+			, #{prodeuctDetailInfo.prodCate}
+			, #{prodeuctDetailInfo.prodCateDetail}
+			, #{tmSeq}
+			)
+       	</foreach>
+	</insert> -->
+</mapper>

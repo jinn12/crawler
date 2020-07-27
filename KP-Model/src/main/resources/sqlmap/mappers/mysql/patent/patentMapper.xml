@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rnd.catchus.dao.mapper.PatentMapper">
+
+	<insert id="insertOnePatentDb" parameterType="Tb20300PatentDbWithKirpisPlusDimensionInfosVO">
+		<selectKey resultType="String" keyProperty="patentSeq" order="BEFORE">
+  			SELECT IFNULL(MAX(patent_seq), 0) + 1 FROM TB20_300_PATENT_DB
+  		</selectKey>
+		INSERT INTO TB20_300_PATENT_DB
+		(
+			patent_seq
+			, appl_no
+			, appl_date
+			, applicant
+			, reg_no
+			, reg_date
+			, open_no
+			, open_date
+			, pub_no
+			, pub_date
+			, int_appl_no
+			, int_appl_date
+			, int_open_no
+			, int_open_date
+			, priority
+			, reg_status
+			, exam_status
+			, judge
+			, org_appl_no
+			, org_appl_date
+			, rel_appl_no
+			, exam_flag
+			, exam_date
+			, exam_claim
+			, title_ko
+			, title_en
+			, appl_type
+			, final_exec
+			, db_year
+			, db_month
+			, db_day
+			, file1_name
+			, draw_path
+			, draw_file
+			, ipc_keyword
+			, main_claim
+			, kpa
+			, claim_keyword
+			, write_time
+			, modify_time
+		)
+		VALUES
+		(
+			#{patentSeq}
+			, #{applNo}
+			, #{applDate}
+			, #{applicant}
+			, #{regNo}
+			, #{regDate}
+			, #{openNo}
+			, #{openDate}
+			, #{pubNo}
+			, #{pubDate}
+			, #{intApplNo}
+			, #{intApplDate}
+			, #{intOpenNo}
+			, #{intOpenDate}
+			, #{priority}
+			, #{regStatus}
+			, #{examStatus}
+			, #{judge}
+			, #{orgApplNo}
+			, #{orgApplDate}
+			, #{relApplNo}
+			, #{examFlag}
+			, #{examDate}
+			, #{examClaim}
+			, #{titleKo}
+			, #{titleEn}
+			, #{applType}
+			, #{finalExec}
+			, #{dbYear}
+			, #{dbMonth}
+			, #{dbDay}
+			, #{file1Name}
+			, #{drawPath}
+			, #{drawFile}
+			, #{ipcKeyword}
+			, #{mainClaim}
+			, #{kpa}
+			, #{claimKeyword}
+			, DATE_FORMAT(NOW(), '%Y%m%d%H%i%s')
+			, DATE_FORMAT(NOW(), '%Y%m%d%H%i%s')
+		)
+	</insert>
+	<insert id="insertListCpc" parameterType="Tb20300PatentDbWithKirpisPlusDimensionInfosVO">
+		INSERT INTO TB20_320_CPC
+		(
+			patent_seq
+			, cpc_seq
+			, cpc
+			, cpc_content
+		)
+		VALUES
+		<foreach collection="cpcInfoList" item="cpcInfo" index="index" separator=",">
+           	(
+           	#{patentSeq}
+			, #{index} + 1
+			, #{cpcInfo.cooperativepatentclassificationNumber}
+			, #{cpcInfo.cooperativepatentclassificationDate}
+			)
+       	</foreach>
+	</insert>
+	<delete id="deleteCpc" parameterType="Tb20300PatentDbWithKirpisPlusDimensionInfosVO">
+		DELETE FROM TB20_320_CPC WHERE PATENT_SEQ = #{patentSeq}
+	</delete>
+	<insert id="insertListApplicant" parameterType="Tb20300PatentDbWithKirpisPlusDimensionInfosVO">
+		INSERT INTO TB20_330_APPLICANT
+		(
+			patent_seq
+			, applicant_seq
+			, applicant_name_ko
+			, applicant_name_en
+			, customer_code
+			, addr
+			, nation
+
+		)
+		VALUES
+		<foreach collection="applicantInfoList" item="applicantInfo" index="index" separator=",">
+           	(
+           	#{patentSeq}
+			, #{index} + 1
+			, #{applicantInfo.name}
+			, #{applicantInfo.engName}
+			, #{applicantInfo.code}
+			, #{applicantInfo.address}
+			, #{applicantInfo.country}
+			)
+       	</foreach>
+	</insert>
+	<delete id="deleteApplicant" parameterType="Tb20300PatentDbWithKirpisPlusDimensionInfosVO">
+		DELETE FROM TB20_330_APPLICANT WHERE PATENT_SEQ = #{patentSeq}
+	</delete>
+	<insert id="insertListAgent" parameterType="Tb20300PatentDbWithKirpisPlusDimensionInfosVO">
+		INSERT INTO TB20_350_AGENT
+		(
+			agent_seq
+			, agent_name_ko
+			, agent_name_en
+			, agent_code
+			, addr
+			, nation
+			, patent_seq
+		)
+		VALUES
+		<foreach collection="agentInfoList" item="agentInfo" index="index" separator=",">
+           	(
+           	#{index} + 1
+			, #{agentInfo.name}
+			, #{agentInfo.engName}
+			, #{agentInfo.code}
+			, #{agentInfo.address}
+			, #{agentInfo.country}
+			, #{patentSeq}
+			)
+       	</foreach>
+	</insert>
+	<delete id="deleteAgent" parameterType="Tb20300PatentDbWithKirpisPlusDimensionInfosVO">
+		DELETE FROM TB20_350_AGENT WHERE PATENT_SEQ = #{patentSeq}
+	</delete>
+	<insert id="insertListIpc" parameterType="Tb20300PatentDbWithKirpisPlusDimensionInfosVO">
+		INSERT INTO TB20_310_IPC
+		(
+			ipc_seq
+			, ipc
+			, ipc_content
+			, patent_seq
+			, ipc_version
+			, ipc4
+		)
+		VALUES
+		<foreach collection="ipcInfoList" item="ipcInfo" index="index" separator=",">
+           	(
+           	#{index} + 1
+			, #{ipcInfo.ipcNumber}
+			, null
+			, #{patentSeq}
+			, #{ipcInfo.ipcDate}
+			, null
+			)
+       	</foreach>
+	</insert>
+	<delete id="deleteIpc" parameterType="Tb20300PatentDbWithKirpisPlusDimensionInfosVO">
+		DELETE FROM TB20_310_IPC WHERE PATENT_SEQ = #{patentSeq}
+	</delete>
+	<insert id="insertListInventor" parameterType="Tb20300PatentDbWithKirpisPlusDimensionInfosVO">
+		INSERT INTO TB20_340_INVENTOR
+		(
+			inventor_seq
+			, inventor_name_ko
+			, inventor_name_en
+			, inventor_code
+			, addr
+			, nation
+			, patent_seq
+		)
+		VALUES
+		<foreach collection="inventorInfoList" item="inventorInfo" index="index" separator=",">
+           	(
+           	#{index} + 1
+			, #{inventorInfo.name}
+			, #{inventorInfo.engName}
+			, #{inventorInfo.code}
+			, #{inventorInfo.address}
+			, #{inventorInfo.country}
+			, #{patentSeq}
+			)
+       	</foreach>
+	</insert>
+	<delete id="deleteInventor" parameterType="Tb20300PatentDbWithKirpisPlusDimensionInfosVO">
+		DELETE FROM TB20_340_INVENTOR WHERE PATENT_SEQ = #{patentSeq}
+	</delete>
+
+	<update id="updateOnePatentDb" parameterType="Tb20300PatentDbWithKirpisPlusDimensionInfosVO">
+		UPDATE TB20_300_PATENT_DB
+		SET
+		<!-- appl_no -->
+			appl_date = #{applDate}
+			, applicant = #{applicant}
+			, reg_no = #{regNo}
+			, reg_date = #{regDate}
+			, open_no = #{openNo}
+			, open_date = #{openDate}
+			, pub_no = #{pubNo}
+			, pub_date = #{pubDate}
+			, int_appl_no = #{intApplNo}
+			, int_appl_date = #{intApplDate}
+			, int_open_no = #{intOpenNo}
+			, int_open_date = #{intOpenDate}
+			, priority = #{priority}
+			, reg_status = #{regStatus}
+			, exam_status = #{examStatus}
+			, judge = #{judge}
+			, org_appl_no = #{orgApplNo}
+			, org_appl_date = #{orgApplDate}
+			, rel_appl_no = #{relApplNo}
+			, exam_flag = #{examFlag}
+			, exam_date = #{examDate}
+			, exam_claim = #{examClaim}
+			, title_ko = #{titleKo}
+			, title_en = #{titleEn}
+			, appl_type = #{applType}
+			, final_exec = #{finalExec}
+			, db_year = #{dbYear}
+			, db_month = #{dbMonth}
+			, db_day = #{dbDay}
+			, file1_name = #{file1Name}
+			, draw_path = #{drawPath}
+			, draw_file = #{drawFile}
+			, ipc_keyword = #{ipcKeyword}
+			, main_claim = #{mainClaim}
+			, kpa = #{kpa}
+			, claim_keyword = #{claimKeyword}
+			<!-- , write_time -->
+			, modify_time = DATE_FORMAT(NOW(), '%Y%m%d%H%i%s')
+		WHERE
+			patent_seq = #{patentSeq}
+	</update>
+	<select id="selectCount" parameterType="Tb20300PatentDbVO" resultType="int">
+		SELECT
+			COUNT(patent_seq)
+		FROM
+			TB20_300_PATENT_DB
+		WHERE
+			appl_no = #{applNo}
+	</select>
+	<select id="selectPatentSeq" parameterType="Tb20300PatentDbWithKirpisPlusDimensionInfosVO" resultType="Tb20300PatentDbVO">
+		SELECT
+			patent_seq
+		FROM
+			TB20_300_PATENT_DB
+		WHERE
+			appl_no = #{applNo}
+		LIMIT 1
+	</select>
+
+</mapper>
